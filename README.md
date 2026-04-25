@@ -1,73 +1,58 @@
-# React + TypeScript + Vite
+# Lance Housekeeper Home
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A mobile-first prototype rebuilding the housekeeper view of the Lance Pad — a hotel ops tool used by staff during live shifts.
 
-Currently, two official plugins are available:
+**Live demo:** [your-vercel-url-here]
+**Loom walkthrough:** [your-loom-url-here]
+**Write-up:** [your-google-doc-url-here]
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## The problem
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+When a housekeeper logs into the Lance Pad today, the home screen says "No rooms assigned" — even when work exists in the system. Front desk and maintenance roles both have functional task queues; housekeeping is selectively unbuilt. Without a digital surface for her core workflow, the housekeeper falls back to paper lists, walkies, and informal coordination — and small issues often go unlogged because the existing form takes 6+ taps for a simple request.
 
-## Expanding the ESLint configuration
+## What this prototype does
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+A rebuild of the housekeeper's shift screen, centered on three integrated pieces:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Inline room status updates** from the home row: tap the status pill, advance Dirty → In Progress → Clean. No navigation required.
+- **DND as a first-class status:** mark a room DND with one tap; it auto-sorts to the bottom of the list.
+- **Quick issue reporting:** file any issue (bulb out, low soap, leaky faucet) in ~10 seconds with three fields — type, urgency, description. Replaces the 6+ tap form in the current Pad.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Designed for a user who checks her phone 50+ times per shift, moves through the property one-handed, and has no time to think.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Tech
+
+- Vite + React + TypeScript
+- Tailwind CSS + shadcn/ui
+- lucide-react for icons
+- Web Speech API for voice input on Report Issue
+- Deployed via Vercel
+
+All data is mocked in `src/data/mockData.ts`. No backend, no authentication, no persistence — this is a UX prototype for design and product validation, not a production system.
+
+## Run locally
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open `http://localhost:5173` in mobile viewport (Chrome DevTools → toggle device toolbar → iPhone 14 Pro).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Project structure
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+  components/
+    home/         — Room list, task list, room row with split tap behavior
+    room/         — Room detail with status flow
+    task/         — Task detail (single Complete action)
+    report/       — Report Issue bottom sheet
+    ui/           — shadcn primitives
+  data/
+    mockData.ts   — 14 rooms, 2 priority tasks, realistic shift load
+  hooks/
+    useAppState.ts — useReducer for room/task state
 ```
