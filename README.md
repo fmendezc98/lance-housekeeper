@@ -2,9 +2,6 @@
 
 A mobile-first prototype rebuilding the housekeeper view of the Lance Pad — a hotel ops tool used by staff during live shifts.
 
-**Live demo:** [your-vercel-url-here]
-**Loom walkthrough:** [your-loom-url-here]
-**Write-up:** [your-google-doc-url-here]
 
 ---
 
