@@ -7,7 +7,7 @@ A mobile-first prototype rebuilding the housekeeper view of the Lance Pad — a 
 
 ## The problem
 
-When a housekeeper logs into the Lance Pad today, the home screen says "No rooms assigned" — even when work exists in the system. Front desk and maintenance roles both have functional task queues; housekeeping is selectively unbuilt. Without a digital surface for her core workflow, the housekeeper falls back to paper lists, walkies, and informal coordination — and small issues often go unlogged because the existing form takes 6+ taps for a simple request.
+When a housekeeper logs into the Lance Pad today, the home screen says "No rooms assigned" — even when work exists in the system. Without a digital surface for their core workflow, the housekeepers fall back to paper lists, walkies, and informal coordination, and small issues often go unlogged because the existing form takes 6+ taps for a simple request.
 
 ## What this prototype does
 
